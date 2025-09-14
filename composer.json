@@ -17,8 +17,7 @@
     "docs": "https://www.spyglasses.io/docs/platforms/drupal"
   },
   "require": {
-    "php": ">=7.4",
-    "drupal/core": "^8.8 || ^9 || ^10 || ^11"
+    "php": ">=7.4"
   },
   "require-dev": {
     "drupal/core-dev": "^9 || ^10 || ^11",
