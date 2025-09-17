@@ -3,7 +3,7 @@ services:
     class: Drupal\spyglasses\StackMiddleware\SpyglassesMiddleware
     arguments: ['@config.factory', '@logger.factory', '@cache.default', '@http_client']
     tags:
-      - { name: http_middleware, priority: 200, responder: true }
+      - { name: http_middleware, priority: 300 }
 
   spyglasses.client:
     class: Drupal\spyglasses\SpyglassesClient
