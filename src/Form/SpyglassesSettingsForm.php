@@ -5,7 +5,7 @@ namespace Drupal\spyglasses\Form;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\spyglasses\SpyglassesClient;
@@ -50,8 +50,8 @@ class SpyglassesSettingsForm extends ConfigFormBase {
    * @param \GuzzleHttp\ClientInterface $http_client
    *   The HTTP client.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, LoggerChannelFactoryInterface $logger_factory, CacheBackendInterface $cache, ClientInterface $http_client) {
-    parent::__construct($config_factory, $module_handler);
+  public function __construct(ConfigFactoryInterface $config_factory, TypedConfigManagerInterface $typed_config_manager, LoggerChannelFactoryInterface $logger_factory, CacheBackendInterface $cache, ClientInterface $http_client) {
+    parent::__construct($config_factory, $typed_config_manager);
     $this->loggerFactory = $logger_factory;
     $this->cache = $cache;
     $this->httpClient = $http_client;
@@ -63,7 +63,7 @@ class SpyglassesSettingsForm extends ConfigFormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('config.factory'),
-      $container->get('module_handler'),
+      $container->get('config.typed'),
       $container->get('logger.factory'),
       $container->get('cache.default'),
       $container->get('http_client')
