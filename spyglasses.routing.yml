@@ -5,13 +5,3 @@ spyglasses.settings:
     _title: 'Spyglasses Settings'
   requirements:
     _permission: 'administer spyglasses'
-
-spyglasses.patterns_sync:
-  path: '/admin/config/services/spyglasses/sync'
-  defaults:
-    _controller: '\Drupal\spyglasses\Controller\SpyglassesController::syncPatterns'
-    _title: 'Sync Patterns'
-  requirements:
-    _permission: 'administer spyglasses'
-    _csrf_token: 'TRUE'
-
