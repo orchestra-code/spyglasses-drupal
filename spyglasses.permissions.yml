@@ -1,0 +1,4 @@
+administer spyglasses:
+  title: 'Administer Spyglasses'
+  description: 'Configure AI traffic analytics and bot detection settings.'
+  restrict access: true
