@@ -19,6 +19,10 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
  */
 class SpyglassesMiddleware implements HttpKernelInterface {
 
+  // Backward compatibility constants for older Symfony versions
+  const MASTER_REQUEST = 1;
+  const SUB_REQUEST = 2;
+
   /**
    * The wrapped HTTP kernel.
    *
@@ -125,7 +129,7 @@ class SpyglassesMiddleware implements HttpKernelInterface {
   /**
    * {@inheritdoc}
    */
-  public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = TRUE) {
+  public function handle(Request $request, int $type = HttpKernelInterface::MAIN_REQUEST, bool $catch = TRUE): Response {
     $request_start_time = microtime(TRUE);
     
     // Get configuration
