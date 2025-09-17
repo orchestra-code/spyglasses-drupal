@@ -15,7 +15,7 @@ This guide walks you through installing and configuring the Spyglasses module fo
 
 ```bash
 # Add the module to your project
-composer require spyglasses/drupal
+composer require spyglasses/spyglasses
 
 # Enable the module
 drush en spyglasses

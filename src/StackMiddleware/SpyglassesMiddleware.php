@@ -97,6 +97,8 @@ class SpyglassesMiddleware implements HttpKernelInterface {
   /**
    * Constructs a SpyglassesMiddleware object.
    *
+   * @param \Symfony\Component\HttpKernel\HttpKernelInterface $http_kernel
+   *   The wrapped HTTP kernel.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config factory.
    * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger_factory
@@ -106,7 +108,8 @@ class SpyglassesMiddleware implements HttpKernelInterface {
    * @param \GuzzleHttp\ClientInterface $http_client
    *   The HTTP client.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, LoggerChannelFactoryInterface $logger_factory, CacheBackendInterface $cache, ClientInterface $http_client) {
+  public function __construct(HttpKernelInterface $http_kernel, ConfigFactoryInterface $config_factory, LoggerChannelFactoryInterface $logger_factory, CacheBackendInterface $cache, ClientInterface $http_client) {
+    $this->httpKernel = $http_kernel;
     $this->configFactory = $config_factory;
     $this->loggerFactory = $logger_factory;
     $this->cache = $cache;
@@ -116,15 +119,6 @@ class SpyglassesMiddleware implements HttpKernelInterface {
     $this->spyglassesClient = new SpyglassesClient($config_factory, $logger_factory, $cache, $http_client);
   }
 
-  /**
-   * Set the wrapped HTTP kernel.
-   *
-   * @param \Symfony\Component\HttpKernel\HttpKernelInterface $http_kernel
-   *   The wrapped HTTP kernel.
-   */
-  public function setHttpKernel(HttpKernelInterface $http_kernel) {
-    $this->httpKernel = $http_kernel;
-  }
 
   /**
    * {@inheritdoc}
